@@ -1,0 +1,132 @@
+﻿<Page x:Class="ETS.UpdateInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ETS"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UpdateInfo">
+    <Page.Resources>
+        <Style x:Key="textStyleTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" 
+                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="textStyleDatePicker" TargetType="DatePicker">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" 
+                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="LightGreen" Offset="0.6"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1.1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.RowSpan="2" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,0">List of Employees</Label>
+        <ListView Name="ListDisplayWin" Grid.Row="2" Grid.RowSpan="11" HorizontalAlignment="Stretch" Margin="20,0,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="90" Header="Employee ID" DisplayMemberBinding="{Binding Path=EmpID}"/>
+                    <GridViewColumn Width="100" Header="First Name" DisplayMemberBinding="{Binding Path=FirstName}"/>
+                    <GridViewColumn Width="100" Header="Last Name" DisplayMemberBinding="{Binding Path=LastName}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="BtnRefresh" Grid.Row="13" Width="120" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,0" Click="RefreshDisplayWin">Refresh List</Button>
+        <Button x:Name="BtnDelete" Grid.Row="13" Width="120" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20,0,0,0" Click="DeleteEmpByID">Delete Employee</Button>
+        
+        <Label Grid.Column="1" Grid.RowSpan="2" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,0">Update Details</Label>
+        <Label Grid.Column="1" Grid.Row="2" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Employee ID:</Label>
+        <TextBlock x:Name="TxtID" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Margin="50,6,0,0"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding EmpID}" DataContextChanged="TxtID_DataContextChanged"/>
+
+        <Label Grid.Column="1" Grid.Row="3" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">First Name:</Label>
+        <TextBox x:Name="TxtFN" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding FirstName}"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="5" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Last Name:</Label>
+        <TextBox x:Name="TxtLN" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding LastName}"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="7" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Email:</Label>
+        <TextBox x:Name="TxtEmail" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding Email}"></TextBox>
+
+        <Label Grid.Column="1" Grid.Row="9" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">DOB:</Label>
+        <DatePicker x:Name="TxtDOB" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding DOB,StringFormat='dd-MM-yyyy'}"></DatePicker>
+
+        <Label Grid.Column="1" Grid.Row="11" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Phone:</Label>
+        <TextBox x:Name="TxtPh" Grid.Column="1" Grid.Row="12" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center"
+                 DataContext="{Binding ElementName=ListDisplayWin,Path=SelectedItem}" Text="{Binding Phone}"></TextBox>
+
+        <Button x:Name="BtnSave" Grid.Column="1" Grid.Row="13" Width="90" Height="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,0" Click="SaveChanges">Save Change</Button>
+        <Button x:Name="BtnClear" Grid.Column="1" Grid.Row="13" Width="90" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0" Click="ClearChangeInfo">Clear</Button>
+
+        <Label Grid.Column="2" Grid.RowSpan="2" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15,0,0,0">Working Hours</Label>
+
+        <Label Grid.Column="2" Grid.Row="3" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Work Date:</Label>
+        <DatePicker x:Name="TxtWorkDate" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center" CalendarClosed="DateSelected" Style="{StaticResource textStyleDatePicker}">
+            <DatePicker.SelectedDate>
+                <Binding Path="WorkDate" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </DatePicker.SelectedDate>
+        </DatePicker>
+
+        <Label Grid.Column="2" Grid.Row="5" FontSize="13" HorizontalAlignment="Left" Margin="15,0,0,0">Hours:</Label>
+        <TextBox x:Name="TxtHours" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Stretch" Margin="20,0,20,0" VerticalContentAlignment="Center" Style="{StaticResource textStyleTextBox}">
+            <TextBox.Text>
+                <Binding Path="Hours" UpdateSourceTrigger="PropertyChanged" Delay="1000">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>            
+        </TextBox>
+        <Button x:Name="BtnRecordHour" Grid.Column="2" Grid.Row="7" Width="90" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,0" Click="RecordHours">Record Hours</Button>
+       
+        <TextBlock x:Name="TxtWorkHours" Grid.Column="2" Grid.Row="9" Grid.RowSpan="2" HorizontalAlignment="Stretch" Margin="20,6,20,0" TextWrapping="Wrap" FontSize="15"></TextBlock>
+
+    </Grid>
+</Page>

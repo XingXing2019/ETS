@@ -1,0 +1,30 @@
+﻿<Window x:Class="ETS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ETS"
+        xmlns:local2="clr-namespace:ETS.Manager"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        mc:Ignorable="d"
+        Title="Employees Tracking System" Icon="icon.png" Width="950" Height="500">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                <GradientStop Color="LightBlue" Offset="0"/>
+                <GradientStop Color="LightGreen" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0.2,0">
+            <Button Background="LightBlue" BorderThickness="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Click="InputInfo" Margin="2,30,10,0" Padding="5">Input Information</Button>
+            <Button Background="LightBlue" BorderThickness="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Click="UpdateInfo"  Margin="2,10,10,0" Padding="5">Update Information</Button>
+            <Button Background="LightBlue" BorderThickness="0" HorizontalAlignment="Left" FontWeight="Bold" FontSize="12" Click="GenerateReport"  Margin="2,10,10,0" Padding="5">Display Report</Button>
+        </StackPanel>
+        <Frame x:Name="disPlayFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Source="/ETS;component/InputInfo.xaml"/>
+    </Grid>
+</Window>
